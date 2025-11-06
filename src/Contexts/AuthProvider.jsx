@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+
   GoogleAuthProvider,
+
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -27,7 +29,7 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signInwithGoogle = () => {
+  const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
@@ -50,7 +52,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     createUser,
     signInUser,
-    signInwithGoogle,
+    signInWithGoogle,
     signOutUser,
     user,
     loading,

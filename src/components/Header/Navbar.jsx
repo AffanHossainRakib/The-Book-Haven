@@ -1,6 +1,7 @@
 import AuthContext from "@/Contexts/AuthContext";
 import { use } from "react";
 import { NavLink } from "react-router";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -22,22 +23,27 @@ const Navbar = () => {
     },
   ];
 
+  const handleSignOut = () => {
+    signOutUser();
+  };
   return (
     <header>
       <nav>
         <ul className="flex justify-center">
-          {navLinks.map((link, index) => (
-            <li key={index} className="mr-5">
-              <NavLink to={link.path}>{link.title}</NavLink>
-            </li>
-          ))}
-
-          {user &&
-            privateNavLinks.map((link, index) => (
+          {!user &&
+            navLinks.map((link, index) => (
               <li key={index} className="mr-5">
                 <NavLink to={link.path}>{link.title}</NavLink>
               </li>
             ))}
+
+          {/* {user &&
+            privateNavLinks.map((link, index) => (
+              <li key={index} className="mr-5">
+                <NavLink to={link.path}>{link.title}</NavLink>
+              </li>
+            ))} */}
+          {user && <Button onClick={handleSignOut}>Sign Out</Button>}
         </ul>
       </nav>
     </header>

@@ -8,9 +8,22 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { use } from "react";
+import AuthContext from "@/Contexts/AuthContext";
 
 export function LoginForm({ className, ...props }) {
+  const { signInWithGoogle } = use(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignInWithGoogle = () => {
+    signInWithGoogle()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <FieldGroup>
@@ -46,7 +59,11 @@ export function LoginForm({ className, ...props }) {
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
-          <Button variant="outline" type="button">
+          <Button
+            variant="outline"
+            type="button"
+            onClick={handleSignInWithGoogle}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
