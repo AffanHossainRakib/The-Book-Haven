@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login/Login";
 import { createBrowserRouter } from "react-router";
 import Signup from "@/pages/Signup/Signup";
+import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     Component: Signup,
+  },
+  {
+    path: "/forgot-password",
+    Component: ForgotPassword,
   },
 ]);
 
