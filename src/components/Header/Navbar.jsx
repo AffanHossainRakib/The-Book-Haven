@@ -2,6 +2,7 @@ import AuthContext from "@/Contexts/AuthContext";
 import { use } from "react";
 import { NavLink } from "react-router";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -16,15 +17,17 @@ const Navbar = () => {
     },
   ];
 
-  const privateNavLinks = [
-    {
-      title: "Logout",
-      path: "/logout",
-    },
-  ];
+  // const privateNavLinks = [
+  //   {
+  //     title: "Logout",
+  //     path: "/logout",
+  //   },
+  // ];
 
   const handleSignOut = () => {
-    signOutUser();
+    signOutUser().then(() => {
+      toast.success("Signed out successfully!");
+    });
   };
   return (
     <header>
