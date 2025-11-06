@@ -9,21 +9,33 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import AuthContext from "@/Contexts/AuthContext";
+import { use, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const ForgetPassword = () => {
+  const { resetPassword } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  // console.log(location.state);
   const preferredEmail = location.state?.email || "";
   const [email, setEmail] = useState(preferredEmail);
-  console.log(email);
   const [loading, setLoading] = useState(false);
 
   const handleResetPassword = (e) => {
     e.preventDefault();
     setLoading(true);
+    resetPassword(email)
+      .then(() => {
+        toast.success("Password reset email sent. Please check your inbox.");
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("Failed to send password reset email.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <div className="w-full max-w-md h-screen mx-auto flex flex-col justify-center space-y-6">
