@@ -8,24 +8,63 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router";
-import { use } from "react";
-import AuthContext from "@/Contexts/AuthContext";
+import { Link } from "react-router";
 
-export function LoginForm({ className, ...props }) {
-  const { signInWithGoogle } = use(AuthContext);
-  const navigate = useNavigate();
+import * as Yup from "yup";
+import { useState } from "react";
 
-  const handleSignInWithGoogle = () => {
-    signInWithGoogle()
+const LoginForm = ({
+  className,
+  handleSignInWithGoogle,
+  handleSignIn,
+  loading,
+  setError,
+  error,
+  ...props
+}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e) => {
+    setError(null); // Clear previous error messages
+    Yup.string()
+      .email("Invalid email address.")
+      .required("Email is required.")
+      .validate(e.target.value)
       .then(() => {
-        navigate("/");
+        setEmail(e.target.value);
       })
-      .catch((err) => console.log(err));
+      .catch((validationError) => {
+        setError(validationError.message);
+      });
+  };
+
+  const handlePasswordChange = (e) => {
+    setError(null); // Clear previous error messages
+    Yup.string()
+      .min(6, "Password must be at least 6 characters long.")
+      .required("Password is required.")
+      .validate(e.target.value)
+      .then(() => {
+        setPassword(e.target.value);
+      })
+      .catch((validationError) => {
+        setError(validationError.message);
+      });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setError(null); // Clear previous error messages
+    handleSignIn(email, password);
   };
 
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+      onSubmit={handleFormSubmit}
+    >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Login to your account</h1>
@@ -33,6 +72,14 @@ export function LoginForm({ className, ...props }) {
             Enter your email below to login to your account
           </p>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <Field className="text-sm text-red-400 bg-red-100 p-2 rounded-md">
+            {error}
+          </Field>
+        )}
+
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
           <Input
@@ -40,6 +87,8 @@ export function LoginForm({ className, ...props }) {
             type="email"
             placeholder="penguin@example.com"
             required
+            disabled={loading}
+            onChange={handleEmailChange}
           />
         </Field>
         <Field>
@@ -52,7 +101,13 @@ export function LoginForm({ className, ...props }) {
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
+          <Input
+            id="password"
+            type="password"
+            required
+            disabled={loading}
+            onChange={handlePasswordChange}
+          />
         </Field>
         <Field>
           <Button type="submit">Login</Button>
@@ -101,4 +156,6 @@ export function LoginForm({ className, ...props }) {
       </FieldGroup>
     </form>
   );
-}
+};
+
+export default LoginForm;
