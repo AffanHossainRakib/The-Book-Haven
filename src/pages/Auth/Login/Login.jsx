@@ -1,14 +1,13 @@
 import AuthLayout from "@/Layouts/AuthLayout";
-
-import { use, useState } from "react";
-import AuthContext from "@/Contexts/AuthContext";
+import { useState } from "react";
 import { Navigate, useLocation } from "react-router";
 import LoginForm from "./login-form";
 import { toast } from "sonner";
 import Loader from "@/components/Loader/Loader";
+import useAuth from "@/hooks/useAuth";
 
 const Login = () => {
-  const { signInWithGoogle, signInUser, user } = use(AuthContext);
+  const { signInWithGoogle, signInUser, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
