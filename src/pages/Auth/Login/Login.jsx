@@ -1,39 +1,46 @@
-// import { LoginForm } from "./login-form";
 import AuthLayout from "@/Layouts/AuthLayout";
 
 import { use, useState } from "react";
 import AuthContext from "@/Contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import LoginForm from "./login-form";
 import { toast } from "sonner";
+import Loader from "@/components/Loader/Loader";
 
 const Login = () => {
-  const { signInWithGoogle, signInUser } = use(AuthContext);
+  const { signInWithGoogle, signInUser, user } = use(AuthContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignInWithGoogle = () => {
+    setLoading(true);
     signInWithGoogle()
       .then(() => {
-        navigate("/").then(() => {
-          toast.success("Login successful!");
-        });
+        toast.success("Login successful!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
   };
 
   const handleSignIn = (email, password) => {
     setLoading(true);
     signInUser(email, password)
       .then(() => {
-        navigate("/").then(() => {
-          toast.success("Login successful!");
-        });
+        toast.success("Login successful!");
       })
-      .catch((err) => setError(err.message))
+      .catch((err) => console.log(err.message))
       .finally(() => setLoading(false));
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (user) {
+    const from = location.state?.from || "/";
+    return <Navigate to={from} replace />;
+  }
 
   return (
     <AuthLayout imgSrc="https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/15231691/453801468.0.0.1421786380.jpg?quality=90&strip=all&crop=16.73,0,66.54,100">

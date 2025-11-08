@@ -23,7 +23,7 @@ const Navbar = () => {
     },
     {
       title: "My Books",
-      path: "/all-books",
+      path: "/my-books",
     },
   ];
 
@@ -51,17 +51,53 @@ const Navbar = () => {
   return (
     <header>
       <nav>
-        <ul className="flex justify-center">
+        <ul className="flex justify-center mt-5">
           {commonLinks.map((link, index) => (
             <li key={index} className="mr-5">
-              <NavLink to={link.path}>{link.title}</NavLink>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive ? "font-bold underline underline-offset-4" : ""
+                }
+              >
+                {({ isActive }) => (
+                  <Button
+                    variant="outline"
+                    className={`${
+                      isActive
+                        ? "font-bold underline underline-offset-4 border-primary text-primary"
+                        : ""
+                    }`}
+                  >
+                    {link.title}
+                  </Button>
+                )}
+              </NavLink>
             </li>
           ))}
 
           {!user &&
             publicNavLinks.map((link, index) => (
               <li key={index} className="mr-5">
-                <NavLink to={link.path}>{link.title}</NavLink>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    isActive ? "font-bold underline underline-offset-4" : ""
+                  }
+                >
+                  {({ isActive }) => (
+                    <Button
+                      variant="outline"
+                      className={`${
+                        isActive
+                          ? "font-bold underline underline-offset-4 border-primary text-primary"
+                          : ""
+                      }`}
+                    >
+                      {link.title}
+                    </Button>
+                  )}
+                </NavLink>
               </li>
             ))}
           {user && <Button onClick={handleSignOut}>Sign Out</Button>}
