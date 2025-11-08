@@ -3,9 +3,10 @@ import { use } from "react";
 import { NavLink } from "react-router";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import Loader from "../Loader/Loader";
 
 const Navbar = () => {
-  const { user, signOutUser } = use(AuthContext);
+  const { user, signOutUser, loading } = use(AuthContext);
 
   const commonLinks = [
     {
@@ -32,8 +33,8 @@ const Navbar = () => {
       path: "/login",
     },
     {
-      title: "Register",
-      path: "/register",
+      title: "Sign Up",
+      path: "/signup",
     },
   ];
 
@@ -42,6 +43,11 @@ const Navbar = () => {
       toast.success("Signed out successfully!");
     });
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <header>
       <nav>
