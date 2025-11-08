@@ -6,23 +6,36 @@ import { toast } from "sonner";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  const navLinks = [
+
+  const commonLinks = [
+    {
+      title: "Home",
+      path: "/",
+    },
+    {
+      title: "All Books",
+      path: "/all-books",
+    },
+    {
+      title: "Add Book",
+      path: "/add-book",
+    },
+    {
+      title: "My Books",
+      path: "/all-books",
+    },
+  ];
+
+  const publicNavLinks = [
     {
       title: "Login",
       path: "/login",
     },
     {
-      title: "Sign Up",
-      path: "/signup",
+      title: "Register",
+      path: "/register",
     },
   ];
-
-  // const privateNavLinks = [
-  //   {
-  //     title: "Logout",
-  //     path: "/logout",
-  //   },
-  // ];
 
   const handleSignOut = () => {
     signOutUser().then(() => {
@@ -33,19 +46,18 @@ const Navbar = () => {
     <header>
       <nav>
         <ul className="flex justify-center">
+          {commonLinks.map((link, index) => (
+            <li key={index} className="mr-5">
+              <NavLink to={link.path}>{link.title}</NavLink>
+            </li>
+          ))}
+
           {!user &&
-            navLinks.map((link, index) => (
+            publicNavLinks.map((link, index) => (
               <li key={index} className="mr-5">
                 <NavLink to={link.path}>{link.title}</NavLink>
               </li>
             ))}
-
-          {/* {user &&
-            privateNavLinks.map((link, index) => (
-              <li key={index} className="mr-5">
-                <NavLink to={link.path}>{link.title}</NavLink>
-              </li>
-            ))} */}
           {user && <Button onClick={handleSignOut}>Sign Out</Button>}
         </ul>
       </nav>
