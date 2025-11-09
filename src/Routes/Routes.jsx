@@ -10,6 +10,7 @@ import MyBooks from "@/pages/MyBooks/MyBooks";
 import BookDetails from "@/components/Shared/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateBook from "@/pages/MyBooks/UpdateBook";
+import Loader from "@/components/Loader/Loader";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: "/forgot-password",
     Component: ForgotPassword,
+  },
+  {
+    path: "/loader",
+    Component: Loader,
   },
 ]);
 
