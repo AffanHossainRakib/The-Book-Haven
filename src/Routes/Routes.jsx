@@ -11,6 +11,7 @@ import BookDetails from "@/components/Shared/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateBook from "@/pages/MyBooks/UpdateBook";
 import Loader from "@/components/Loader/Loader";
+import NotFound from "@/pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
   {
     path: "/loader",
     Component: Loader,
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ]);
 
