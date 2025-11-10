@@ -19,17 +19,33 @@ export const COLORS = {
     hero: "from-indigo-900 via-indigo-700 to-teal-600",
     card: "from-indigo-500/10 via-teal-500/10 to-blue-500/10",
     navbar: "from-white via-indigo-50 to-teal-50",
+    darkNavbar: "from-slate-900 via-indigo-950 to-slate-900",
   },
   glassmorphism: {
     bg: "from-white/40 to-white/10",
     border: "border-white/20",
     backdrop: "backdrop-blur-lg",
+    darkBg: "from-slate-800/40 to-slate-900/40",
+    darkBorder: "border-slate-700/30",
   },
   neutral: {
     light: "slate-50",
     DEFAULT: "slate-100",
     dark: "slate-700",
     darker: "slate-900",
+  },
+  dark: {
+    bg: {
+      primary: "slate-900",
+      secondary: "slate-800",
+      card: "slate-800/50",
+    },
+    text: {
+      primary: "slate-100",
+      secondary: "slate-300",
+      muted: "slate-400",
+    },
+    border: "slate-700",
   },
 };
 
