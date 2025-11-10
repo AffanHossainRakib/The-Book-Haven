@@ -4,15 +4,18 @@ import "./index.css";
 import { RouterProvider } from "react-router";
 import router from "./Routes/Routes";
 import AuthProvider from "./Contexts/AuthProvider";
+import { ThemeProvider } from "./Contexts/ThemeContext";
 import { Toaster } from "./components/ui/sonner";
 import { Toaster as HotToaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-      <Toaster position="top-right" />
-      <HotToaster position="top-center" reverseOrder={false} />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+        <HotToaster position="top-center" reverseOrder={false} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 );
