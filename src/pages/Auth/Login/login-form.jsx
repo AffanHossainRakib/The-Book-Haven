@@ -15,7 +15,7 @@ import { useState } from "react";
 
 const LoginForm = ({
   className,
-  handleSignInWithGoogle,
+
   handleSignIn,
   loading,
   setError,
@@ -66,16 +66,18 @@ const LoginForm = ({
       onSubmit={handleFormSubmit}
     >
       <FieldGroup>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Login to your account</h1>
-          <p className="text-muted-foreground text-sm text-balance">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-teal-600 bg-clip-text text-transparent">
+            Login to your account
+          </h1>
+          <p className="text-gray-600 text-sm text-balance">
             Enter your email below to login to your account
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <Field className="text-sm text-red-400 bg-red-100 p-2 rounded-md">
+          <Field className="text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-lg">
             {error}
           </Field>
         )}
@@ -111,11 +113,15 @@ const LoginForm = ({
           />
         </Field>
         <Field>
-          <Button type="submit">Login</Button>
+          {loading ? (
+            <Button>Logging in...</Button>
+          ) : (
+            <Button type="submit">Login</Button>
+          )}
         </Field>
-        <FieldSeparator>Or continue with</FieldSeparator>
+        {/* <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
-          <Button
+           <Button
             variant="outline"
             type="button"
             onClick={handleSignInWithGoogle}
@@ -146,7 +152,9 @@ const LoginForm = ({
               ></path>
             </svg>{" "}
             Login with Google
-          </Button>
+          </Button> 
+        </Field>*/}
+        <Field>
           <FieldDescription className="text-center">
             Don&apos;t have an account?{" "}
             <Link to="/signup" className="underline underline-offset-4">
