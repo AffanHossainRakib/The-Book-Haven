@@ -7,7 +7,7 @@ import AuthProvider from "./Contexts/AuthProvider";
 import { ThemeProvider } from "./Contexts/ThemeContext";
 import { Toaster } from "./components/ui/sonner";
 import { Toaster as HotToaster } from "react-hot-toast";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
