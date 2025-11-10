@@ -7,6 +7,7 @@ import AuthProvider from "./Contexts/AuthProvider";
 import { ThemeProvider } from "./Contexts/ThemeContext";
 import { Toaster } from "./components/ui/sonner";
 import { Toaster as HotToaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
         <Toaster position="top-right" />
         <HotToaster position="top-center" reverseOrder={false} />
+        <Analytics />
       </AuthProvider>
     </ThemeProvider>
   </StrictMode>
