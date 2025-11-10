@@ -133,7 +133,7 @@ const UpdateBook = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12">
+    <div className="min-h-screen bg-background transition-colors py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -142,17 +142,17 @@ const UpdateBook = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Update Book
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-muted-foreground">
             Edit your book information
           </p>
         </motion.div>
 
         {/* Form */}
         <motion.div
-          className="bg-white rounded-2xl shadow-2xl p-8 md:p-12"
+          className="bg-card border border-border rounded-2xl shadow-2xl p-8 md:p-12 transition-colors"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -160,7 +160,10 @@ const UpdateBook = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Title */}
             <div>
-              <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label
+                htmlFor="title"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Book Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -169,7 +172,7 @@ const UpdateBook = () => {
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+                className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 placeholder="Enter book title"
                 disabled={submitting}
               />
@@ -177,7 +180,10 @@ const UpdateBook = () => {
 
             {/* Author */}
             <div>
-              <label htmlFor="author" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label
+                htmlFor="author"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Author <span className="text-red-500">*</span>
               </label>
               <input
@@ -186,7 +192,7 @@ const UpdateBook = () => {
                 name="author"
                 value={formData.author}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+                className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 placeholder="Enter author name"
                 disabled={submitting}
               />
@@ -196,7 +202,10 @@ const UpdateBook = () => {
             <div className="grid md:grid-cols-2 gap-6">
               {/* Genre */}
               <div>
-                <label htmlFor="genre" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label
+                  htmlFor="genre"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Genre <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -204,7 +213,7 @@ const UpdateBook = () => {
                   name="genre"
                   value={formData.genre}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all bg-white"
+                  className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   disabled={submitting}
                 >
                   <option value="">Select a genre</option>
@@ -218,7 +227,10 @@ const UpdateBook = () => {
 
               {/* Rating */}
               <div>
-                <label htmlFor="rating" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label
+                  htmlFor="rating"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Rating (1-5) <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -230,7 +242,7 @@ const UpdateBook = () => {
                   min="1"
                   max="5"
                   step="0.1"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+                  className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   placeholder="4.5"
                   disabled={submitting}
                 />
@@ -239,7 +251,10 @@ const UpdateBook = () => {
 
             {/* Cover Image URL */}
             <div>
-              <label htmlFor="coverImage" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label
+                htmlFor="coverImage"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Cover Image URL <span className="text-red-500">*</span>
               </label>
               <input
@@ -248,7 +263,7 @@ const UpdateBook = () => {
                 name="coverImage"
                 value={formData.coverImage}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+                className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 placeholder="https://example.com/book-cover.jpg"
                 disabled={submitting}
               />
@@ -267,7 +282,8 @@ const UpdateBook = () => {
                   alt="Cover preview"
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.target.src = "https://via.placeholder.com/200x300?text=Invalid+URL";
+                    e.target.src =
+                      "https://via.placeholder.com/200x300?text=Invalid+URL";
                   }}
                 />
               </motion.div>
@@ -275,7 +291,10 @@ const UpdateBook = () => {
 
             {/* Summary */}
             <div>
-              <label htmlFor="summary" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label
+                htmlFor="summary"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Summary <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -284,7 +303,7 @@ const UpdateBook = () => {
                 value={formData.summary}
                 onChange={handleChange}
                 rows="5"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none"
+                className="w-full px-4 py-3 bg-background text-foreground border-2 border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                 placeholder="Enter a brief summary of the book..."
                 disabled={submitting}
               />
@@ -295,7 +314,7 @@ const UpdateBook = () => {
               <button
                 type="button"
                 onClick={() => navigate("/my-books")}
-                className="flex-1 px-6 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300"
+                className="flex-1 px-6 py-4 border-2 border-border text-foreground font-semibold rounded-xl hover:bg-muted transition-all duration-300"
                 disabled={submitting}
               >
                 Cancel
@@ -307,16 +326,41 @@ const UpdateBook = () => {
               >
                 {submitting ? (
                   <>
-                    <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    <svg
+                      className="animate-spin h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
                     </svg>
                     Updating Book...
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     Update Book
                   </>

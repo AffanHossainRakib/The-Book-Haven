@@ -9,7 +9,7 @@ const Loader = ({ message }) => {
     //   <Spinner className=" w-8 h-8" />
     // </div>
 
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="w-[calc(100vw-4rem)] h-[calc(100vh-4rem)] flex items-center justify-center">
       <div className="loader  ">
         <div>
           <ul>
