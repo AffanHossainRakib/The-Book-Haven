@@ -29,17 +29,17 @@ const Navbar = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <nav className="bg-secondary border-b border-border shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="h-8 w-32 bg-muted animate-pulse rounded" />
-          </div>
-        </div>
-      </nav>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <nav className="bg-secondary border-b border-border shadow-sm">
+  //       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  //         <div className="flex justify-between items-center h-16">
+  //           <div className="h-8 w-32 bg-muted animate-pulse rounded" />
+  //         </div>
+  //       </div>
+  //     </nav>
+  //   );
+  // }
 
   return (
     <nav className="bg-secondary border-b border-border shadow-sm sticky top-0 z-50 backdrop-blur-lg transition-colors duration-300">
