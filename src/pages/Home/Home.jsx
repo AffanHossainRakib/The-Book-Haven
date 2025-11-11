@@ -3,17 +3,16 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import useAxios from "@/hooks/useAxios";
 import BookCard from "@/components/Shared/BookCard";
-import Loader from "@/components/Loader/Loader";
 import HeroBanner from "@/components/Home/HeroBanner";
 import AboutSection from "@/components/Home/AboutSection";
 import GenresSection from "@/components/Home/GenresSection";
 import toast from "react-hot-toast";
+import Loader from "@/components/Loader/Loader";
 
 const Home = () => {
   const axios = useAxios();
   const [latestBooks, setLatestBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchLatestBooks = async () => {
       try {
@@ -39,10 +38,6 @@ const Home = () => {
     fetchLatestBooks();
   }, []);
 
-  if (loading) {
-    return <Loader message="Loading The Book Haven..." />;
-  }
-
   return (
     <div className="min-h-screen">
       <HeroBanner />
@@ -65,6 +60,8 @@ const Home = () => {
             </p>
           </motion.div>
 
+          {loading ? <Loader message="Loading latest books..." /> : null}
+
           {latestBooks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {latestBooks.map((book, index) => (
@@ -80,14 +77,18 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-2xl text-muted-foreground">No books available yet</p>
-              <Link to="/add-book">
-                <button className="mt-6 px-6 py-3 bg-gradient-to-r from-indigo-600 to-teal-600 text-white rounded-lg hover:shadow-lg transition-all duration-300">
-                  Add the First Book
-                </button>
-              </Link>
-            </div>
+            !loading && (
+              <div className="text-center py-20">
+                <p className="text-2xl text-muted-foreground">
+                  No books available yet
+                </p>
+                <Link to="/add-book">
+                  <button className="mt-6 px-6 py-3 bg-gradient-to-r from-indigo-600 to-teal-600 text-white rounded-lg hover:shadow-lg transition-all duration-300">
+                    Add the First Book
+                  </button>
+                </Link>
+              </div>
+            )
           )}
         </div>
       </section>
