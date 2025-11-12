@@ -17,7 +17,9 @@ const Login = () => {
       .then(() => {
         toast.success("Login successful!");
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => {
+        toast.error(err.message || "Login failed. Please try again.");
+      })
       .finally(() => setLoading(false));
   };
 
