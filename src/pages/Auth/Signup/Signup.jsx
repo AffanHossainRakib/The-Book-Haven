@@ -6,27 +6,16 @@ import toast from "react-hot-toast";
 import useAuth from "@/hooks/useAuth";
 
 const Signup = () => {
-  const { user, createUser, updateUsersFullName, signInWithGoogle } = useAuth();
+  const { user, createUser, updateUsersFullName } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const handleSignInWithGoogle = () => {
-    setLoading(true);
-    signInWithGoogle()
-      .then(() => {
-        navigate("/");
-        toast.success("Login with google account successful!");
-      })
-      .catch((err) => console.log(err.message))
-      .finally(() => setLoading(false));
-  };
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -65,7 +54,6 @@ const Signup = () => {
         loading={loading}
         error={error}
         setError={setError}
-        handleSignInWithGoogle={handleSignInWithGoogle}
       />
     </AuthLayout>
   );
