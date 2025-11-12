@@ -56,7 +56,10 @@ const BookDetails = () => {
         userPhoto: user?.photoURL || "",
       };
 
-      const response = await axiosSecure.post(`/book/${id}/comments`, commentData);
+      const response = await axiosSecure.post(
+        `/book/${id}/comments`,
+        commentData
+      );
 
       // Add new comment to the list (real-time update)
       if (response.data.comment) {
@@ -74,15 +77,22 @@ const BookDetails = () => {
   };
 
   if (loading) {
-    return <Loader message="Loading book details..." />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader message="Loading All Books." />
+      </div>
+    );
   }
-
   if (!book) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background transition-colors">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Book not found</h2>
-          <p className="text-muted-foreground">The book you're looking for doesn't exist.</p>
+          <h2 className="text-3xl font-bold text-foreground mb-4">
+            Book not found
+          </h2>
+          <p className="text-muted-foreground">
+            The book you're looking for doesn't exist.
+          </p>
         </div>
       </div>
     );
@@ -110,7 +120,11 @@ const BookDetails = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 {/* Rating Badge */}
                 <div className="absolute top-6 right-6 bg-black/80 backdrop-blur-md text-white px-4 py-2 rounded-full flex items-center gap-2 border border-white/20">
-                  <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    className="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                   <span className="font-bold text-lg">{book.rating}</span>
@@ -138,8 +152,18 @@ const BookDetails = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
                 >
-                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  <svg
+                    className="w-6 h-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
                   </svg>
                   <span className="font-semibold">by {book.author}</span>
                 </motion.div>
@@ -161,8 +185,12 @@ const BookDetails = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
                 >
-                  <h2 className="text-2xl font-bold text-foreground mb-3">Summary</h2>
-                  <p className="text-foreground leading-relaxed text-lg">{book.summary}</p>
+                  <h2 className="text-2xl font-bold text-foreground mb-3">
+                    Summary
+                  </h2>
+                  <p className="text-foreground leading-relaxed text-lg">
+                    {book.summary}
+                  </p>
                 </motion.div>
 
                 {/* Added By */}
@@ -173,7 +201,10 @@ const BookDetails = () => {
                   transition={{ delay: 0.6, duration: 0.6 }}
                 >
                   <p className="text-sm text-muted-foreground">
-                    Added by <span className="font-semibold text-primary">{book.userName}</span>
+                    Added by{" "}
+                    <span className="font-semibold text-primary">
+                      {book.userName}
+                    </span>
                   </p>
                 </motion.div>
               </div>
@@ -237,28 +268,49 @@ const BookDetails = () => {
                 >
                   <div className="flex-shrink-0">
                     <img
-                      src={comment.userPhoto || "https://via.placeholder.com/40"}
+                      src={
+                        comment.userPhoto || "https://via.placeholder.com/40"
+                      }
                       alt={comment.userName}
                       className="w-10 h-10 rounded-full object-cover"
                     />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h4 className="font-semibold text-foreground">{comment.userName}</h4>
+                      <h4 className="font-semibold text-foreground">
+                        {comment.userName}
+                      </h4>
                       <span className="text-sm text-muted-foreground">
-                        {comment.createdAt && formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
+                        {comment.createdAt &&
+                          formatDistanceToNow(new Date(comment.createdAt), {
+                            addSuffix: true,
+                          })}
                       </span>
                     </div>
-                    <p className="text-foreground leading-relaxed">{comment.comment}</p>
+                    <p className="text-foreground leading-relaxed">
+                      {comment.comment}
+                    </p>
                   </div>
                 </motion.div>
               ))
             ) : (
               <div className="text-center py-12 text-muted-foreground">
-                <svg className="w-16 h-16 mx-auto mb-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                <svg
+                  className="w-16 h-16 mx-auto mb-4 text-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
                 </svg>
-                <p className="text-lg">No comments yet. Be the first to share your thoughts!</p>
+                <p className="text-lg">
+                  No comments yet. Be the first to share your thoughts!
+                </p>
               </div>
             )}
           </div>
