@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Loader from "@/components/Loader/Loader";
 import toast from "react-hot-toast";
 import BookTable from "./BookTable";
+import useAxios from "@/hooks/useAxios";
 
 const AllBooks = () => {
-  const axiosSecure = useAxiosSecure();
+  const axios = useAxios();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("");
@@ -19,7 +19,7 @@ const AllBooks = () => {
     try {
       setLoading(true);
       const endpoint = sortBy ? `/all-books?sort=${sortBy}` : "/all-books";
-      const response = await axiosSecure.get(endpoint);
+      const response = await axios.get(endpoint);
 
       if (Array.isArray(response.data)) {
         setBooks(response.data);
