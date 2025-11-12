@@ -99,15 +99,12 @@ const Navbar = () => {
                   <img
                     src={
                       user.photoURL ||
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uLl8zBoK0_iM5pNwJAC8hQ2f68YKtlgc7Q&s"
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHfd3PPulVSp4ZbuBFNkePoUR_fLJQe474Ag&s"
                     }
                     alt={user.displayName}
                     className="w-8 h-8 rounded-full object-cover"
                     title={user.displayName || "User"}
                   />
-                  <span className="text-sm font-medium text-card-foreground max-w-[100px] truncate">
-                    {user.displayName || "User"}
-                  </span>
                 </div>
                 <button
                   onClick={handleSignOut}
