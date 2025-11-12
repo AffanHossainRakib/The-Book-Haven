@@ -19,6 +19,7 @@ const SignupForm = ({
   className,
   setName,
   setEmail,
+  setProfilePicture,
   setPassword,
   handleSignup,
   loading,
@@ -50,6 +51,20 @@ const SignupForm = ({
       .validate(e.target.value)
       .then(() => {
         setEmail(e.target.value);
+      })
+      .catch((validationError) => {
+        setError(validationError.message);
+      });
+  };
+
+  const handleProfilePictureChange = (e) => {
+    setError(null); // Clear previous error messages
+    Yup.string()
+      .url("Invalid URL format.")
+      .required("Profile picture URL is required.")
+      .validate(e.target.value)
+      .then(() => {
+        setProfilePicture(e.target.value);
       })
       .catch((validationError) => {
         setError(validationError.message);
@@ -116,6 +131,19 @@ const SignupForm = ({
             disabled={loading}
           />
         </Field>
+
+        <Field>
+          <FieldLabel htmlFor="profilePicture">Profile Picture URL</FieldLabel>
+          <Input
+            id="profilePicture"
+            type="text"
+            placeholder="https://example.com/profile.jpg"
+            required
+            onChange={handleProfilePictureChange}
+            disabled={loading}
+          />
+        </Field>
+
         <Field>
           <div className="flex items-center">
             <FieldLabel htmlFor="password">Password</FieldLabel>

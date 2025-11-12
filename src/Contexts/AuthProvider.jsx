@@ -45,6 +45,12 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const updateUsersProfilePicture = (profilePictureUrl) => {
+    return updateProfile(auth.currentUser, {
+      photoURL: profilePictureUrl,
+    });
+  };
+
   const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
@@ -66,6 +72,7 @@ const AuthProvider = ({ children }) => {
     signOutUser,
     updateUsersFullName,
     resetPassword,
+    updateUsersProfilePicture,
     user,
     loading,
   };

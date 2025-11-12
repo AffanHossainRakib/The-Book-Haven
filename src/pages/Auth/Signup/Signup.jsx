@@ -6,11 +6,13 @@ import toast from "react-hot-toast";
 import useAuth from "@/hooks/useAuth";
 
 const Signup = () => {
-  const { user, createUser, updateUsersFullName } = useAuth();
+  const { user, createUser, updateUsersFullName, updateUsersProfilePicture } =
+    useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -26,6 +28,7 @@ const Signup = () => {
     createUser(email, password)
       .then(() => {
         updateUsersFullName(name);
+        updateUsersProfilePicture(profilePicture);
 
         navigate("/").then(() => {
           toast.success("Account created successfully!");
@@ -50,6 +53,7 @@ const Signup = () => {
         setName={setName}
         setEmail={setEmail}
         setPassword={setPassword}
+        setProfilePicture={setProfilePicture}
         handleSignup={handleSignup}
         loading={loading}
         error={error}
