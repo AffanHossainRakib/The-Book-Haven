@@ -129,7 +129,11 @@ const UpdateBook = () => {
   };
 
   if (loading) {
-    return <Loader message="Loading book details..." />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader message="Loading your book." />
+      </div>
+    );
   }
 
   return (

@@ -38,7 +38,7 @@ const AllBooks = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader message="Loading your books..." />
+        <Loader message="Loading All Books." />
       </div>
     );
   }
