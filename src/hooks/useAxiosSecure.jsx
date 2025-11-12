@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
+import toast from "react-hot-toast";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -29,7 +30,7 @@ const useAxiosSecure = () => {
       (err) => {
         const status = err.response?.status;
         if (status === 401 || status === 403) {
-          console.log("Logging out user for bad request");
+          toast.error("Logging out user for bad request");
           signOutUser().then(() => {
             navigate("/login");
           });
