@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import BookCard from "@/components/Shared/BookCard";
 import Loader from "@/components/Loader/Loader";
 import toast from "react-hot-toast";
+import BookTable from "./BookTable";
 
 const AllBooks = () => {
   const axiosSecure = useAxiosSecure();
@@ -126,20 +126,15 @@ const AllBooks = () => {
           </div>
         </motion.div>
 
-        {/* Books Grid */}
+        {/* Books Table */}
         {books.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {books.map((book, index) => (
-              <motion.div
-                key={book._id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.5 }}
-              >
-                <BookCard book={book} />
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <BookTable books={books} />
+          </motion.div>
         ) : (
           <motion.div
             className="text-center py-20"
