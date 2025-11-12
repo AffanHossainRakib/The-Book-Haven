@@ -5,6 +5,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useAuth from "@/hooks/useAuth";
 import Loader from "@/components/Loader/Loader";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyBooks = () => {
   const axiosSecure = useAxiosSecure();
@@ -39,25 +40,37 @@ const MyBooks = () => {
   };
 
   const handleDelete = async (bookId, bookTitle) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to delete "${bookTitle}"? This action cannot be undone.`
-    );
+    Swal.fire({
+      title: `Do you want to delete "${bookTitle}"?`,
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          setDeleting(bookId);
+          await axiosSecure.delete(`/book/${bookId}?userEmail=${user.email}`);
 
-    if (!confirmed) return;
+          // Remove from UI
+          setBooks(books.filter((book) => book._id !== bookId));
+          toast.success("Book deleted successfully!");
+        } catch (error) {
+          console.error("Error deleting book:", error);
+          toast.error(error.response?.data?.message || "Failed to delete book");
+        } finally {
+          setDeleting(null);
+        }
 
-    try {
-      setDeleting(bookId);
-      await axiosSecure.delete(`/book/${bookId}?userEmail=${user.email}`);
-
-      // Remove from UI
-      setBooks(books.filter((book) => book._id !== bookId));
-      toast.success("Book deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting book:", error);
-      toast.error(error.response?.data?.message || "Failed to delete book");
-    } finally {
-      setDeleting(null);
-    }
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   if (loading) {
@@ -160,7 +173,9 @@ const MyBooks = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-foreground">{book.author}</td>
+                      <td className="px-6 py-4 text-foreground">
+                        {book.author}
+                      </td>
                       <td className="px-6 py-4">
                         <span className="inline-block px-3 py-1 bg-secondary text-primary rounded-full text-sm font-medium">
                           {book.genre}
@@ -287,7 +302,10 @@ const MyBooks = () => {
                         </span>
                       </div>
                       <div className="flex gap-2">
-                        <Link to={`/update-book/${book._id}`} className="flex-1">
+                        <Link
+                          to={`/update-book/${book._id}`}
+                          className="flex-1"
+                        >
                           <button className="w-full py-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium">
                             Update
                           </button>
