@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import useAuth from "@/hooks/useAuth";
 
 const Login = () => {
-  const { signInUser, user } = useAuth();
+  const { signInUser, user, signInWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
@@ -14,6 +14,18 @@ const Login = () => {
   const handleSignIn = (email, password) => {
     setLoading(true);
     signInUser(email, password)
+      .then(() => {
+        toast.success("Login successful!");
+      })
+      .catch((err) => {
+        toast.error(err.message || "Login failed. Please try again.");
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const handleSignInWithGoogle = () => {
+    setLoading(true);
+    signInWithGoogle()
       .then(() => {
         toast.success("Login successful!");
       })
@@ -35,6 +47,7 @@ const Login = () => {
         loading={loading}
         error={error}
         setError={setError}
+        handleSignInWithGoogle={handleSignInWithGoogle}
       />
     </AuthLayout>
   );

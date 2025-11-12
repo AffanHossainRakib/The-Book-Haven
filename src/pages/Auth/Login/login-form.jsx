@@ -15,7 +15,7 @@ import { useState } from "react";
 
 const LoginForm = ({
   className,
-
+  handleSignInWithGoogle,
   handleSignIn,
   loading,
   setError,
@@ -74,14 +74,12 @@ const LoginForm = ({
             Enter your email below to login to your account
           </p>
         </div>
-
         {/* Error Message */}
         {error && (
           <Field className="text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-lg">
             {error}
           </Field>
         )}
-
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
           <Input
@@ -119,9 +117,10 @@ const LoginForm = ({
             <Button type="submit">Login</Button>
           )}
         </Field>
-        {/* <FieldSeparator>Or continue with</FieldSeparator>
+        <FieldSeparator>Or continue with</FieldSeparator>
+
         <Field>
-           <Button
+          <Button
             variant="outline"
             type="button"
             onClick={handleSignInWithGoogle}
@@ -152,8 +151,9 @@ const LoginForm = ({
               ></path>
             </svg>{" "}
             Login with Google
-          </Button> 
-        </Field>*/}
+          </Button>
+        </Field>
+
         <Field>
           <FieldDescription className="text-center">
             Don&apos;t have an account?{" "}
