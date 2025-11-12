@@ -72,10 +72,10 @@ const router = createBrowserRouter([
     path: "/signup",
     Component: Signup,
   },
-  {
-    path: "/forgot-password",
-    Component: ForgotPassword,
-  },
+  // {
+  //   path: "/forgot-password",
+  //   Component: ForgotPassword,
+  // },
   {
     path: "/loader",
     Component: Loader,
