@@ -1,7 +1,7 @@
 import AuthLayout from "@/Layouts/AuthLayout";
 import SignupForm from "./signup-form";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import useAuth from "@/hooks/useAuth";
 
