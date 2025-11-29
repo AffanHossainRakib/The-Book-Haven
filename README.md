@@ -147,8 +147,8 @@ Follow these steps to run the project on your local machine:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/AffanHossainRakib/PH-Assignment10-client.git
-cd PH-Assignment10-client
+git clone https://github.com/AffanHossainRakib/The-Book-Haven.git
+cd The-Book-Haven
 ```
 
 2. **Install dependencies**
